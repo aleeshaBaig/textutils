@@ -16,7 +16,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Home</a>
+          <a class="nav-link active" aria-current="page" href="/">Home</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">About Us</a>
@@ -39,7 +39,7 @@
   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 </div>
     <div class="container">
-        <form action="/removepunctuation" method="get">
+        <form action="/removepunctuation" method="post" >{% csrf_token %}
         <div class="form-group">
         <label for="exampleFormControlTextarea1" class="form-label">Enter your Text Here !</label>
         <textarea class="form-control" id="exampleFormControlTextarea1" name="text" rows="9"></textarea>

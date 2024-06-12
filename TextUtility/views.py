@@ -6,11 +6,11 @@ def index(request):
 
 
 def removepunctuation(request):
-    djtext = request.GET.get('text', 'default')
-    RemovePunctuation = request.GET.get('RemovePunctuation', 'off')
-    upperCase = request.GET.get('upperCase', 'off')
-    newLine = request.GET.get('newLine','off')
-    charCount = request.GET.get('charCount','off')
+    djtext = request.POST.get('text', 'default')
+    RemovePunctuation = request.POST.get('RemovePunctuation', 'off')
+    upperCase = request.POST.get('upperCase', 'off')
+    newLine = request.POST.get('newLine','off')
+    charCount = request.POST.get('charCount','off')
     print(RemovePunctuation)
     if RemovePunctuation == 'on':
      punctuation = '''". , ? ! : ; ' \" - – — ( ) [ ] { } ... / \\ ` ´ ~ ^ • · # & @ * _ |"'''
@@ -19,26 +19,33 @@ def removepunctuation(request):
          if char not in punctuation:
             analyzed = analyzed + char
      params = {'purpose': 'RemovePunctuation', 'analyzed_text': analyzed}
-     return render(request, 'analyze.html', params)
-    elif upperCase == "on":
+     djtext = analyzed
+    # return render(request, 'analyze.html', params)
+    if upperCase == "on":
          upperText = djtext.upper()
          params = {'purpose': 'upCase', 'analyzed_text': upperText}
-         return render(request, 'analyze.html', params)
-    elif newLine == "on":
+         djtext = analyzed
+         #return render(request, 'analyze.html', params)
+    if newLine == "on":
         analyzed = ""
         for char in djtext:
 
-            if char !="/n":
+            if char !="/n" and char !="/r":
              analyzed = analyzed + char
         params = {'purpose': 'New Line Remover', 'analyzed_text': analyzed}
-        return render(request, 'analyze.html', params)
-    elif charCount == 'on':
+        djtext = analyzed
+        #return render(request, 'analyze.html', params)
+    if charCount == 'on':
         analyzed = len(djtext)
         params = {'purpose': 'Character Count', 'analyzed_text': analyzed}
-        return render(request, 'analyze.html', params)
+        #djtext = analyzed
 
-    else:
-        return HttpResponse("Error")
+            #if(newLine !='on'and RemovePunctuation !='on' and upperCase != 'on'):
+            #return HttpResponse('Choose any operation first')
+
+
+
+    return render(request, 'analyze.html', params)
 
 
 

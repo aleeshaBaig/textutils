@@ -22,7 +22,7 @@ from django.shortcuts import render
 urlpatterns = [
 
     path('admin/', admin.site.urls),
-    path('index',views.index, name ='index'),
+    path('',views.index, name ='index'),
     path('removepunctuation', views.removepunctuation, name='removepunctuation'),
     path('newlineremover',views.newlineremover, name='newlineremover'),
     path('capitals',views.capitals, name='capitals'),
