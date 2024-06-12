@@ -11,8 +11,8 @@ def removepunctuation(request):
     upperCase = request.GET.get('upperCase', 'off')
     newLine = request.GET.get('newLine','off')
     charCount = request.GET.get('charCount','off')
-    print(newLine)
-    if RemovePunctuation == 'RemovePunctuation':
+    print(RemovePunctuation)
+    if RemovePunctuation == 'on':
      punctuation = '''". , ? ! : ; ' \" - – — ( ) [ ] { } ... / \\ ` ´ ~ ^ • · # & @ * _ |"'''
      analyzed = ""
      for char in djtext:
@@ -20,11 +20,11 @@ def removepunctuation(request):
             analyzed = analyzed + char
      params = {'purpose': 'RemovePunctuation', 'analyzed_text': analyzed}
      return render(request, 'analyze.html', params)
-    elif upperCase == "upperCase":
+    elif upperCase == "on":
          upperText = djtext.upper()
          params = {'purpose': 'upCase', 'analyzed_text': upperText}
          return render(request, 'analyze.html', params)
-    elif newLine == "newLine":
+    elif newLine == "on":
         analyzed = ""
         for char in djtext:
 
@@ -32,7 +32,7 @@ def removepunctuation(request):
              analyzed = analyzed + char
         params = {'purpose': 'New Line Remover', 'analyzed_text': analyzed}
         return render(request, 'analyze.html', params)
-    elif charCount == 'charCount':
+    elif charCount == 'on':
         analyzed = len(djtext)
         params = {'purpose': 'Character Count', 'analyzed_text': analyzed}
         return render(request, 'analyze.html', params)
